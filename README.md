@@ -28,7 +28,7 @@ Click class.Rmd to open the R Markdown file.
 
 
 ### Loading Data
-Loading in data is going to be essential to any project. Last time we used data from packages we loaded in. This time, we will want to use outside data. Data is provided in the folder in the repository.
+Loading in data is going to be essential to any project. We will be using outside data, provided in the folder in the repository.
 
 The data we will be working with comes from basketball-reference.com, an open source NBA data website. We will specifically be using 2021-2022 NBA player data. https://www.basketball-reference.com/leagues/NBA_2022_per_game.html
 
