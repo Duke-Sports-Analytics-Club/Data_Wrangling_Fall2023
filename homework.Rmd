@@ -1,7 +1,7 @@
 ---
 title: "homework"
 author: "Sean Li and Ben Thorpe"
-date: "Due before" 
+date: "" 
 output: pdf_document
 ---
 
@@ -23,17 +23,14 @@ Data for this homework can be found through the class repository. You can obtain
 https://www.basketball-reference.com/leagues/NBA_2022_per_game.html
 
 
-Once you are done, commit and push one last time to make sure all your changes are tracked. Then fill out the google form below. 
-
-TURN IT IN HERE: https://forms.gle/PVqBb7JhaaKnTvAXA
-
-
 
 ## Exercises
 
 ```{r libraries}
 library(tidyverse)
 library(openxlsx)
+library(readxl)
+
 ```
 
 
@@ -44,21 +41,30 @@ We will be working with 2021-2022 NBA Player Stats Data.
 1. Load in the data (make sure datafile is in repository folder!!)
 
 ```{r}
-data <- read.xlsx(xlsxFile = "data/nbadata.xlsx")
+data <- read_excel("nbadata.xlsx")
 ```
 
 
-2. Take a look at the data using glimpse()... what seems to be a bit off about the player names?
+2. Take a look at the data using "dataframe$column" to select a column of a dataframe... what seems to be a bit off about the player names?
+
 
 
 3. String Parsing
 
 ```{r}
-names <- strsplit(data$Player, "\\\\")
+# Create a sample data frame with a column containing values like "Precious Achiuwa\achiupr01"
+
+# Define a function to extract the part before the backslash
+extract_name <- function(x) {
+  sub("\\\\.+", "", x)
+}
+
+# Use dplyr to apply the function
 data <- data %>%
-  separate(Player, "Player",  "\\\\") %>%
-  group_by(Player) %>%
-  summarise(threes = mean(`3PA`))
+  mutate(Cleaned_Name = sapply(Player, extract_name))
+
+# Print the modified data frame
+print(data$Cleaned_Name)
 ```
 
 
@@ -105,11 +111,6 @@ CHALLENGE: Create a report of the 2021-2022 Phoenix Suns describing the followin
 
 
 
-
-
-
-
-install.packages("hoopR")
 
 
 

@@ -15,6 +15,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(hoopR)
 library(openxlsx)
+library(readxl)
+
 ```
 
 
@@ -46,7 +48,7 @@ glimpse(nba_pbp)
 - loading in from .xlsx
 
 ```{r}
-xlsx_data <- read.xlsx(xlsxFile = "data/nbadata.xlsx")
+nbadata <- read_excel("nbadata.xlsx")
 ```
 
 ## Exploring dplyr
@@ -116,7 +118,8 @@ Dropping NA values:
 ```{r}
 nba_pbp %>% drop_na()
 
-nba_pbp %>% drop_na(participants_1_athlete_id)
+nba_pbp %>% drop_na(athlete_id_1)
+
 ```
 
 Creating new columns with `mutate()`:
